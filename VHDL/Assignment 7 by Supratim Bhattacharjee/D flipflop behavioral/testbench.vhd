@@ -22,22 +22,40 @@ begin
   DUT: dff port map(D_in,clk_in,O_out);
   process
     begin
-    D_in<='0';
-    clk_in<='0';
+      for i in 1 to 4 loop
+        clk_in<='0';
+        wait for 1 ns;
+        clk_in<='1';
+        wait for 1 ns;
+      end loop;
+      wait;
+    end process;
+    
+    process
+      begin
+    D_in<='1';
     wait for 1 ns;
     
     D_in<='0';
-    clk_in<='1';
     wait for 1 ns;
     
     D_in<='1';
-    clk_in<='0';
     wait for 1 ns;
     
     D_in<='1';
-    clk_in<='1';
     wait for 1 ns;
     
+    D_in<='1';
+    wait for 1 ns;
+    
+    D_in<='0';
+    wait for 1 ns;
+    
+    D_in<='1';
+    wait for 1 ns;
+    
+    D_in<='0';
+    wait for 1 ns;
     wait;
   end process;
 end tb;
