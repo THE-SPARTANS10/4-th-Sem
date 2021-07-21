@@ -23,40 +23,63 @@ begin
   DUT: dff_async_reset port map(D_in,clk_in,reset_in,O_out);
   process
     begin
+    for i in 1 to 6 loop
+        clk_in<='0';
+        wait for 1 ns;
+        clk_in<='1';
+        wait for 1 ns;
+      end loop;
+      wait;
+    end process;
+    
+    process
+      begin
     D_in<='1';
-    
-    clk_in<='0';
     reset_in<='0';
-    wait for 1 ns;
-    
-    clk_in<='0';
-    reset_in<='1';
-    wait for 1 ns;
-    
-    clk_in<='1';
-    reset_in<='0';
-    wait for 1 ns;
-    
-    clk_in<='1';
-    reset_in<='1';
     wait for 1 ns;
     
     D_in<='0';
-    
-    clk_in<='0';
     reset_in<='0';
     wait for 1 ns;
     
-    clk_in<='0';
+    D_in<='1';
     reset_in<='1';
     wait for 1 ns;
     
-    clk_in<='1';
+    D_in<='1';
+    reset_in<='1';
+    wait for 1 ns;
+    
+    D_in<='1';
     reset_in<='0';
     wait for 1 ns;
     
-    clk_in<='1';
+    D_in<='0';
     reset_in<='1';
+    wait for 1 ns;
+    
+    D_in<='1';
+    reset_in<='0';
+    wait for 1 ns;
+    
+    D_in<='0';
+    reset_in<='1';
+    wait for 1 ns;
+    
+    D_in<='1';
+    reset_in<='1';
+    wait for 1 ns;
+    
+    D_in<='1';
+    reset_in<='0';
+    wait for 1 ns;
+    
+    D_in<='0';
+    reset_in<='0';
+    wait for 1 ns;
+    
+    D_in<='1';
+    reset_in<='0';
     wait for 1 ns;
     wait;
   end process;
