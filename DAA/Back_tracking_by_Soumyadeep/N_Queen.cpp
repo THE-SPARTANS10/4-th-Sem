@@ -1,10 +1,14 @@
 // N chess queens on an N×N chessboard so that no two queens attack each other
+
+//By Soumyadeep Pal
 #include <iostream>
 using namespace std;
 
+static int count;
 // Queen's position Printing in grid style
-void print_Grid_style(int userRows, int userColumns, int **arr)
+void print_Grid_style(int userRows, int **arr)
 {
+    int userColumns=userRows;
     cout << "\n";
     cout << " ";
     int i, j;
@@ -41,7 +45,6 @@ void print_Grid_style(int userRows, int userColumns, int **arr)
         }
         cout << "\n";
     }
-    cout << "\n";
 }
 
 bool check_pos(int **arr, int x, int y, int n)
@@ -82,7 +85,8 @@ bool nqueen(int **arr, int x, int n) //not required to pass y & prev column coz 
     //base case:prog stop when we already placed all the queen
     if (x >= n)
     {
-        return true;
+        print_Grid_style(n, arr);
+        count++;
     }
 
     for (int col = 0; col < n; col++)
@@ -123,16 +127,20 @@ int main()
             arr[i][j] = 0;
         }
     }
-
+    if(n>3)
+	{
+    nqueen(arr, 0, n);
+    }
+    cout<<"\nPossible solutions exist for an "<<n<<"-queen problem: "<<count<<"\n";
     // Queen's position Printing in grid style
-    if (nqueen(arr, 0, n))
-    {
-        print_Grid_style(n, n, arr);
-    }
-    else
-    {
-        cout << "\nSoln Not possible :)\n";
-    }
+    // if (nqueen(arr, 0, n))
+    // {
+    //     print_Grid_style(n, n, arr);
+    // }
+    // else
+    // {
+    //     cout << "\nSoln Not possible :)\n";
+    // }
 
     return 0;
 }
