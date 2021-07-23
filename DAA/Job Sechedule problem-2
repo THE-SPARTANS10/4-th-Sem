@@ -7,14 +7,54 @@ struct Job{
 	int profit;
 };
 
-bool comp(Job a,Job b) /// comparator function for sort the the array according to profit
+
+
+void Swap(struct Job* a,struct Job* b)
 {
-	return (a.profit>b.profit);
+    //First swap the id
+    int temp=a->id;
+    a->id=b->id;
+    b->id=temp;
+    //Second swap the deadlines
+    temp=a->dead;
+    a->dead=b->dead;
+    b->dead=temp;
+    //Third swap the profits
+    temp=a->profit;
+    a->profit=b->profit;
+    b->profit=temp;
+    
+}
+
+int partition(Job arr[],int l,int r)
+{
+	int pivot=arr[r].profit;
+	int i=l-1,j;
+	for(j=l;j<r;j++)
+	{
+		if(arr[j].profit<pivot)
+		{
+			i++;
+			swap(arr[i],arr[j]);
+		}
+	}
+	swap(arr[i+1],arr[r]);
+	return i+1;
+}
+
+void quick_sort(Job arr[],int l,int r)
+{
+	if(l<r)
+    {
+        int pi=partition(arr,l,r);
+        quick_sort(arr,l,pi-1);
+        quick_sort(arr,pi+1,r);
+    }
 }
 
 void Job_Schedule(Job arr[],int n) ///function for schedule the job
 {
-	sort(arr,arr+n,comp);
+	quick_sort(arr,0,n-1);
 	int i,profit=0,maximum=0,j;
 	for(i=0;i<n;i++)
 	{
@@ -25,7 +65,7 @@ void Job_Schedule(Job arr[],int n) ///function for schedule the job
 	{
 		slot[i]=-1;
 	}
-	for(i=0;i<n;i++)
+	for(i=n-1;i>=0;i--)
 	{
 		for(j=arr[i].dead;j>0;j--)
 		{
