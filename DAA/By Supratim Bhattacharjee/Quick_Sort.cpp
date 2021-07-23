@@ -10,16 +10,18 @@ Time Complexity:- O(nlogn) in best case, O(n^2) in worst case
 Space Complexity:- O(n) due to recursion stack
 */
 
-int partition(int arr[],int low,int high)
+static int count;
+
+int partition(int* arr,int low,int high,int n)
 {
     int pivot=arr[low]; //Picking first element as pivot
     int i=low;
     int j=high;
     while(i<j)
     {
-        while(arr[i]<=pivot)
+        while(arr[i]<=pivot && i<n)
             i++;
-        while(arr[j]>pivot)
+        while(arr[j]>pivot && j>=0)
             j--;
         if(i<j)
         {
@@ -31,25 +33,36 @@ int partition(int arr[],int low,int high)
     int temp=arr[low];
     arr[low]=arr[j];
     arr[j]=temp;
+    cout<<"Pass "<<++count<<": ";
+    for (int i=0;i<n;i++)
+        cout<<arr[i]<<" ";
+    cout<<endl;
     return j;
 }
 
-void quickSort(int arr[],int low,int high)
+void quickSort(int* arr,int low,int high,int n)
 {
     if(high<=low)
         return;
-    int pivotIndex=partition(arr,low,high);
-    quickSort(arr,low,pivotIndex-1);
-    quickSort(arr,pivotIndex+1,high);
+    int pivotIndex=partition(arr,low,high,n);
+    quickSort(arr,low,pivotIndex-1,n);
+    quickSort(arr,pivotIndex+1,high,n);
 }
 
 int main()
 {
-    int arr[]={4,7,6,-3,2,8,1,56,34,23};
-    int n=sizeof(arr)/sizeof(arr[0]);
-    quickSort(arr,0,n-1);
+    int n;
+    cout<<"Enter array size: ";
+    cin>>n;
+    int* arr=new int[n];
+    cout<<"Enter array elements: "<<endl;
+    for(int i=0;i<n;i++)
+        cin>>arr[i];
+    quickSort(arr,0,n-1,n);
+    cout<<"Array after using quick sort algorithm: "<<endl;
     for(int i=0;i<n;i++)
         cout<<arr[i]<<" ";
     cout<<endl;
+    delete [] arr;
     return 0;
 }
