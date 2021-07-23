@@ -18,7 +18,8 @@ class MaxAndMin
 /*
 Min-Max algorithm(divide and conquer algorithm)
 ----------------------------
-Time complexity:-O(n)
+Timecomplexity:-O(n)
+Space complexity:-O(n)
 */
 
 int minimum(int a,int b)
@@ -31,7 +32,7 @@ int maximum(int a,int b)
     return a>b?a:b;
 }
 
-MaxAndMin minMax(int arr[],int low,int high)
+MaxAndMin minMax(int* arr,int low,int high)
 {
     if(low==high)
     {
@@ -66,10 +67,17 @@ MaxAndMin minMax(int arr[],int low,int high)
 
 int main()
 {
-    int arr[]={4,7,6,-3,2,8,1,56,34,23};
-    MaxAndMin result=minMax(arr,0,9);
+    int n;
+    cout<<"Enter array size: ";
+    cin>>n;
+    int* arr=new int[n];
+    cout<<"Enter array elements: "<<endl;
+    for(int i=0;i<n;i++)
+        cin>>arr[i];
+    MaxAndMin result=minMax(arr,0,n-1);
 
-    cout<<result.max<<" "<<result.min<<endl;
+    cout<<"Maximum element in array: "<<result.max<<endl<<"Minimum element in array:"<<" "<<result.min<<endl;
 
+    delete [] arr;
     return 0;
 }
