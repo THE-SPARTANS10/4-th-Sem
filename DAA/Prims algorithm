@@ -62,7 +62,11 @@ int main()
 {
 	fstream infile;
 	infile.open("C:\\Users\\sudin jana\\Desktop\\data structure and algorithm\\graph\\prims.txt",ios::in);
-	
+	if (!infile)
+       {
+        cout << "Error to open the file";
+        return 1;
+       }
 	int n,i,j,e,source;//number
 	cout<<"Enter the number of vertices"<<"\n";
 	infile>>n;
