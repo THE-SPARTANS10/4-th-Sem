@@ -19,6 +19,11 @@ int main()
 	fstream infile;
 	infile.open("C:\\Users\\sudin jana\\Desktop\\data structure and algorithm\\graph\\Bellman_ford_algo.txt",ios::in);
 	int n,m;
+	if (!infile)
+       {
+        cout << "Error to open the file";
+        return 1;
+        }
 	cout<<"Enter the total number of vertices and edges of the graph"<<"\n";
 	infile>>n;
 	infile>>m;
