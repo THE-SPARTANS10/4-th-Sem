@@ -1,13 +1,16 @@
 //Name:- Supratim Bhattacharjee
 #include<iostream>
+#include<fstream>
 using namespace std;
 typedef long long ll;
 
 /*
 Quick Sort(divide and conquer algorithm)
 ----------------------
-Time Complexity:- O(nlogn) in best case, O(n^2) in worst case
-Space Complexity:- O(n) due to recursion stack
+Time Complexity:- O(nlogn) in best case and average case , O(n^2) in worst case
+                  Worst case when array is already sorted in increasing or decreasing order
+
+Space Complexity:- O(logn) in best case or average case and O(n) in worst case due to recursion stack
 */
 
 static int count;
@@ -51,14 +54,23 @@ void quickSort(int* arr,int low,int high,int n)
 
 int main()
 {
+    fstream infile;
+    infile.open("D:\\Engineering books and class notes\\sem4no\\Practical exam\\DAA\\input.txt", ios::in);
+    if (!infile)
+    {
+        cout << "Error to open the file";
+        return 1;
+    }
+
     int n;
-    cout<<"Enter array size: ";
-    cin>>n;
+    //cout<<"Enter array size: ";
+    infile>>n;
     int* arr=new int[n];
-    cout<<"Enter array elements: "<<endl;
+    //cout<<"Enter array elements: "<<endl;
     for(int i=0;i<n;i++)
-        cin>>arr[i];
+        infile>>arr[i];
     quickSort(arr,0,n-1,n);
+    cout<<endl;
     cout<<"Array after using quick sort algorithm: "<<endl;
     for(int i=0;i<n;i++)
         cout<<arr[i]<<" ";
