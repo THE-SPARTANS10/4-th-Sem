@@ -1,7 +1,7 @@
 //Name:- Supratim Bhattacharjee
 //MERGE SORT
 //Time Complexity:-O(nlogn) both in best case and worst case
-//Space Complexity:-O(n)
+//Space Complexity:-O(n) for the extra array
 
 /*
 Merge sort is a divide and conquer sorting algorithm cause in this sort the array is devided 
@@ -10,6 +10,7 @@ merge algorithm(merging two sorted array) and at last we get the sorted array ba
 */
 
 #include<iostream>
+#include<fstream>
 using namespace std;
 
 //Function to display array elements
@@ -63,19 +64,11 @@ void merge(int arr[], int low, int mid, int high)
 
     //Second(temp2) sublist got exhausted so copying remaining elements of temp1 to arr 
     while (i<size1)
-    {
-        arr[k]=temp1[i];
-        i++;
-        k++;
-    }
+        arr[k++]=temp1[i++];
 
     //First(temp1) sublist got exhausted so copying remaining elements of temp2 to arr
     while (j<size2)
-    {
-        arr[k]=temp2[j];
-        j++;
-        k++;
-    }
+        arr[k++]=temp2[j++];
 }
 
 //Function for merge sort
@@ -85,7 +78,7 @@ void mergeSort(int arr[], int low, int high)
     if(low<high)
     {
         //Finding mid index of the sublist
-        int mid=(low+high)/2;
+        int mid=low+(high-low)/2; //For avoiding datatype overflow
         //Applying mergeSort for the first subarray
         mergeSort(arr, low, mid);
         //Applying mergeSort for the second subarray
@@ -97,14 +90,22 @@ void mergeSort(int arr[], int low, int high)
 
 int main()
 {
+    fstream infile;
+    infile.open("D:\\Engineering books and class notes\\sem4no\\Practical exam\\DAA\\input.txt", ios::in);
+    if (!infile)
+    {
+        cout << "Error to open the file";
+        return 1;
+    }
+
     int n;
-    cout << "Enter the size of the array: ";
-    cin >> n;
+    //cout << "Enter the size of the array: ";
+    infile>>n;
 
     int arr[n];
-    cout << "Enter array elements: " << endl;
+    //cout << "Enter array elements: " << endl;
     for (int i = 0; i < n; i++)
-        cin >> arr[i];
+        infile >> arr[i];
 
     cout << "Before merge sort array elements: ";
     displayArray(arr, n);
