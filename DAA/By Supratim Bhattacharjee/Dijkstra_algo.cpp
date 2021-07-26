@@ -8,7 +8,7 @@ typedef long long ll;
 /*
 Dijkstra's Algorithm(Greedy algorithm)
 ----------------------
-Time Complexity:-
+Time Complexity:-O(n^2)
 */
 
 void printAdjacencyMatrix(int** adj,int n)
