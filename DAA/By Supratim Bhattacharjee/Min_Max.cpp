@@ -1,5 +1,6 @@
 //Name:- Supratim Bhattacharjee
 #include<iostream>
+#include<fstream>
 using namespace std;
 typedef long long ll;
 
@@ -17,9 +18,9 @@ class MaxAndMin
 
 /*
 Min-Max algorithm(divide and conquer algorithm)
-----------------------------
-Timecomplexity:-O(n)
-Space complexity:-O(n)
+----------------------------------------------
+Time complexity:-O(n) but number of comparasions are less
+Space complexity:-O(n) due to recursion stack used
 */
 
 int minimum(int a,int b)
@@ -54,7 +55,7 @@ MaxAndMin minMax(int* arr,int low,int high)
     }
     else
     {
-        int mid=low+(high-low)/2;
+        int mid=low+(high-low)/2; // to avoid datatype overflow
         MaxAndMin leftPart=minMax(arr,low,mid);
         MaxAndMin rightPart=minMax(arr,mid+1,high);
 
@@ -67,13 +68,20 @@ MaxAndMin minMax(int* arr,int low,int high)
 
 int main()
 {
+    fstream infile;
+    infile.open("D:\\Engineering books and class notes\\sem4no\\Practical exam\\DAA\\input.txt", ios::in);
+    if (!infile)
+    {
+        cout << "Error to open the file";
+        return 1;
+    }
     int n;
-    cout<<"Enter array size: ";
-    cin>>n;
+    //cout<<"Enter array size: ";
+    infile>>n;
     int* arr=new int[n];
-    cout<<"Enter array elements: "<<endl;
+    //cout<<"Enter array elements: "<<endl;
     for(int i=0;i<n;i++)
-        cin>>arr[i];
+        infile>>arr[i];
     MaxAndMin result=minMax(arr,0,n-1);
 
     cout<<"Maximum element in array: "<<result.max<<endl<<"Minimum element in array:"<<" "<<result.min<<endl;
