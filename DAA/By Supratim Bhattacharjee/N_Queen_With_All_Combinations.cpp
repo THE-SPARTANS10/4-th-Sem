@@ -1,7 +1,16 @@
 //Name:- Supratim Bhattacharjee
 #include<iostream>
+#include<fstream>
 using namespace std;
 typedef long long ll;
+
+/*
+N Queen(Backtracking Algorithm)
+---------------------------------------------
+Time complexity:- O(n!)
+Space Complexity:- O(n^2)
+*/
+
 
 static int count;
 
@@ -41,20 +50,25 @@ void printGrid(int** grid,int n)
     cout<<"Correct configuration of queens: "<<endl;
     for(int i=0;i<n;i++)
     {
+        int placedCol;
         for(int j=0;j<n;j++)
         {
             if(grid[i][j]==1)
+            {
+                placedCol=j;
                 cout<<"Q ";
+            }
             else
                 cout<<"_ ";
         }
+        cout<<"  placed at col: "<<placedCol;
         cout<<endl;
     }
 }
 
 bool NQueenHelper(int** grid,int currentRow,int n)
 {
-    if(currentRow>=n)
+    if(currentRow==n)
     {
         count++;
         printGrid(grid,n);
@@ -87,16 +101,24 @@ void solveNQueen(int** grid,int n)
 
 int main()
 {
+    fstream infile;
+    infile.open("D:\\Engineering books and class notes\\sem4no\\Practical exam\\DAA\\input.txt", ios::in);
+    if (!infile)
+    {
+        cout << "Error to open the file";
+        return 1;
+    }
     int n;
-    cout<<"Enter board size: ";
-    cin>>n;
+    //cout<<"Enter board size: ";
+    infile>>n;
     int** grid=new int*[n];
     for(int i=0;i<n;i++)
+    {
         grid[i]=new int[n];
-    for(int i=0;i<n;i++)
         for(int j=0;j<n;j++)
             grid[i][j]=0;
-
+    }
+    
     solveNQueen(grid,n);
 
     cout<<"Number of configurations: "<<count<<endl;
