@@ -46,7 +46,7 @@ float knapsack(float* profit,float* weight,float w,int n)
     if(i<n)
         result[i]=tempWeight/weight[i];
     float answer=profitCalculation(profit,result,n);
-    delete result;
+    delete [] result;
     return answer;
 }
 
