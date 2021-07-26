@@ -6,8 +6,8 @@ typedef long long ll;
 /*
 Fractional knapsack algorithm(Greedy algorithm)
 ----------------------------
-Time complexity:-O(n^2)
-Space complexity:-O(n)
+Time complexity:-O(n^2) (O(n^2) for sorting and O(n) for traversing the whole profit and weight array)
+Space complexity:-O(1)
 */
 
 float knapsack(float* profit,float* weight,float w,int n)
