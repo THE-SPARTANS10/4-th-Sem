@@ -21,8 +21,11 @@ float knapsack(float* profit,float* weight,float w,int n)
             if(profit[j]/weight[j]>profit[maxIndx]/weight[maxIndx])
                 maxIndx=j;
         }
-        swap(profit[i],profit[maxIndx]);
-        swap(weight[i],weight[maxIndx]);
+        if(i!=maxIndx)
+        {
+            swap(profit[i],profit[maxIndx]);
+            swap(weight[i],weight[maxIndx]);
+        }
     }
     float tempWeight=w;
     int i=0;
