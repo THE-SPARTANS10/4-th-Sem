@@ -10,19 +10,9 @@ Time complexity:-O(n^2)
 Space complexity:-O(n)
 */
 
-float profitCalculation(float* profit,float* result,int n)
-{
-    float sum=0;
-    for(int i=0;i<n;i++)
-        sum+=profit[i]*result[i];
-    return sum;
-}
-
 float knapsack(float* profit,float* weight,float w,int n)
 {
-    float *result=new float[n];
-    for(int i=0;i<n;i++)
-        result[i]=0;
+    int count=0;
     for(int i=0;i<n-1;i++)
     {
         int maxIndx=i;
@@ -40,14 +30,12 @@ float knapsack(float* profit,float* weight,float w,int n)
     {
         if(weight[i]>tempWeight)
             break;
-        result[i]=1;
+        count+=profit[i];
         tempWeight-=weight[i];
     }
     if(i<n)
-        result[i]=tempWeight/weight[i];
-    float answer=profitCalculation(profit,result,n);
-    delete [] result;
-    return answer;
+        count+=(tempWeight/weight[i])*profit[i];
+    return count;
 }
 
 
