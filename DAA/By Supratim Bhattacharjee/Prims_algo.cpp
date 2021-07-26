@@ -7,7 +7,8 @@ typedef long long ll;
 /*
 Prim's algorithm(Greedy algorithm)
 ----------------------------
-Time complexity:-O((e+n)logn) where n is number of vertices and e number of edges
+Time complexity:- O(n^2) where n is number of vertices and e number of edges
+Space complexity:- O(n) for extra arrays
 */
 
 int findMinimumVertex(int* weight,bool* visited,int n)
@@ -82,10 +83,11 @@ int main()
 
     int** adj=new int*[n];
     for(int i=0;i<n;i++)
+    {
         adj[i]=new int[n];
-    for(int i=0;i<n;i++)
         for(int j=0;j<n;j++)
             adj[i][j]=0;
+    }
 
     for(int i=0;i<e;i++)
     {
