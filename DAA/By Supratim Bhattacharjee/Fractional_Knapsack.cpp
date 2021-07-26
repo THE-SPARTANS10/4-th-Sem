@@ -69,8 +69,8 @@ int main()
         cin>>weight[i];
     int maxProfit=knapsack(profit,weight,w,n);
     cout<<"Maximum profit is: "<<maxProfit<<endl;
-    delete profit;
-    delete weight;
+    delete [] profit;
+    delete [] weight;
 
     return 0;
 }
