@@ -1,5 +1,6 @@
 //Name:- Supratim Bhattacharjee
 #include<iostream>
+#include<fstream>
 using namespace std;
 typedef long long ll;
 
@@ -7,7 +8,7 @@ typedef long long ll;
 M coloring(Backtracking)
 ----------------------
 Time Complexity:- O(m^n) where n is number of nodes of graph and m is number of colors
-Space Complexity:- O(n)+O(n) due to color array and recursion stack
+Space Complexity:- O(n)+O(m) due to color array and recursion stack apart for graph storage
 */
 
 static int possibility;
@@ -74,12 +75,20 @@ void colorGraph(int** graph,int m,int n)
 
 int main()
 {
+    fstream infile;
+    infile.open("D:\\Engineering books and class notes\\sem4no\\Practical exam\\DAA\\input.txt", ios::in);
+    if (!infile)
+    {
+        cout << "Error to open the file";
+        return 1;
+    }
+
     int m;
     int n,e;
-    cout<<"Enter number of vertices of graph: ";
-    cin>>n;
-    cout<<"Enter number of edges of graph: ";
-    cin>>e;
+    //cout<<"Enter number of vertices of graph: ";
+    infile>>n;
+    //cout<<"Enter number of edges of graph: ";
+    infile>>e;
     int** adj=new int*[n];
     for(int i=0;i<n;i++)
         adj[i]=new int[n];
@@ -89,19 +98,22 @@ int main()
 
     for(ll i=0;i<e;i++)
     {
-        cout<<"Enter connected verties of graph:"<<endl;
+        //cout<<"Enter connected verties of graph:"<<endl;
         ll first,second;
-        cin>>first>>second;
+        infile>>first>>second;
         adj[first][second]=1;
         adj[second][first]=1;
     }
 
-    cout<<"Enter number of colors: ";
-    cin>>m;
+    //cout<<"Enter number of colors: ";
+    infile>>m;
 
     colorGraph(adj,m,n);
 
-    cout<<"Number of posibilities to color the graph : "<<possibility<<endl;
+    if(possibility==0)
+        cout<<"There are no posibilities to color the graph"<<endl;
+    else
+        cout<<"Number of posibilities to color the graph : "<<possibility<<endl;
 
     for(int i=0;i<n;i++)
         delete [] adj[i];
