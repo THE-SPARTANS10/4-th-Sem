@@ -6,7 +6,7 @@ typedef long long ll;
 /*
 M coloring(Backtracking)
 ----------------------
-Time Complexity:- O(n^m) where n is number of nodes of graph and m is number of colors
+Time Complexity:- O(m^n) where n is number of nodes of graph and m is number of colors
 Space Complexity:- O(n)+O(n) due to color array and recursion stack
 */
 
