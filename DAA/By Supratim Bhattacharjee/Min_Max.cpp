@@ -19,7 +19,7 @@ class MaxAndMin
 /*
 Min-Max algorithm(divide and conquer algorithm)
 ---------------------------------------------------------
-Time complexity:-O(n) but number of comparasions are less
+Time complexity:-O(n) but number of comparasions are less compared to Naive method
 Space complexity:-O(n) due to recursion stack used
 */
 
