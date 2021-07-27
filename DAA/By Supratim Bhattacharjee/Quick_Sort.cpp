@@ -54,6 +54,14 @@ void quickSort(int* arr,int low,int high,int n)
 
 int main()
 {
+    /*
+    Input to be given :-
+
+    10
+    4 2 7 -678 83 122 1000 46 10 87
+
+    */
+
     fstream infile;
     infile.open("D:\\Engineering books and class notes\\sem4no\\Practical exam\\DAA\\input.txt", ios::in);
     if (!infile)
