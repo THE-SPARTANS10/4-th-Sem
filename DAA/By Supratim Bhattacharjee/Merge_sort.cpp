@@ -13,6 +13,8 @@ merge algorithm(merging two sorted array) and at last we get the sorted array ba
 #include<fstream>
 using namespace std;
 
+static int pass;
+
 //Function to display array elements
 void displayArray(int arr[], int n)
 {
@@ -22,7 +24,7 @@ void displayArray(int arr[], int n)
 }
 
 //Function to merge two sorted subarrays
-void merge(int arr[], int low, int mid, int high)
+void merge(int arr[], int low, int mid, int high,int n)
 {
     //Determining the size of two subarrays
     int size1 = mid - low + 1;
@@ -69,10 +71,17 @@ void merge(int arr[], int low, int mid, int high)
     //First(temp1) sublist got exhausted so copying remaining elements of temp2 to arr
     while (j<size2)
         arr[k++]=temp2[j++];
+
+    cout<<"Pass "<<++pass<<": ";
+    for(int i=0;i<n;i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
 }
 
 //Function for merge sort
-void mergeSort(int arr[], int low, int high)
+void mergeSort(int arr[], int low, int high,int n)
 {
     //Checking if lowerbound and upperbound are not same or sublist has more than 2 elements
     if(low<high)
@@ -80,16 +89,25 @@ void mergeSort(int arr[], int low, int high)
         //Finding mid index of the sublist
         int mid=low+(high-low)/2; //For avoiding datatype overflow
         //Applying mergeSort for the first subarray
-        mergeSort(arr, low, mid);
+        mergeSort(arr, low, mid,n);
         //Applying mergeSort for the second subarray
-        mergeSort(arr, mid+1, high);
+        mergeSort(arr, mid+1, high,n);
         //Merging two sorted subarrays
-        merge(arr,low,mid,high);
+        merge(arr,low,mid,high,n);
     }
 }
 
 int main()
 {
+
+    /*
+    Input to be given :-
+
+    9
+    5 4 3 2 1 10 11 12 100
+
+    */
+
     fstream infile;
     infile.open("D:\\Engineering books and class notes\\sem4no\\Practical exam\\DAA\\input.txt", ios::in);
     if (!infile)
@@ -110,7 +128,7 @@ int main()
     cout << "Before merge sort array elements: ";
     displayArray(arr, n);
 
-    mergeSort(arr, 0, n-1);
+    mergeSort(arr, 0, n-1, n);
 
     cout << "After merge sort array elements: ";
     displayArray(arr, n);
