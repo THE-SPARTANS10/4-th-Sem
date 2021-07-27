@@ -1,7 +1,18 @@
 //Name:- Supratim Bhattacharjee
 #include<iostream>
+#include<fstream>
 using namespace std;
 typedef long long ll;
+
+/*
+N Queen(Backtracking Algorithm)
+---------------------------------------------
+Time complexity:- O(n!)
+Space Complexity:- O(n^2)
+*/
+
+
+static int count;
 
 bool isSafe(int** grid,int i,int j,int n)
 {
@@ -34,10 +45,35 @@ bool isSafe(int** grid,int i,int j,int n)
     return true;
 }
 
-bool NQueenHelper(int** grid,int currentRow,int n)
+void printGrid(int** grid,int n)
+{
+    cout<<"Correct configuration of queens: "<<endl;
+    for(int i=0;i<n;i++)
+    {
+        int placedCol;
+        for(int j=0;j<n;j++)
+        {
+            if(grid[i][j]==1)
+            {
+                placedCol=j;
+                cout<<"Q ";
+            }
+            else
+                cout<<"_ ";
+        }
+        cout<<"  placed at col: "<<placedCol;
+        cout<<endl;
+    }
+}
+
+void NQueenHelper(int** grid,int currentRow,int n)
 {
     if(currentRow==n)
-        return true;
+    {
+        count++;
+        printGrid(grid,n);
+        cout<<endl;
+    }
     else
     {
         int currentCol=0;
@@ -46,49 +82,42 @@ bool NQueenHelper(int** grid,int currentRow,int n)
             if(isSafe(grid,currentRow,currentCol,n))
             {
                 grid[currentRow][currentCol]=1;
-                bool canNextQueenBePlaced=NQueenHelper(grid,currentRow+1,n);
-                if(canNextQueenBePlaced)
-                    return true;
+                NQueenHelper(grid,currentRow+1,n);
                 grid[currentRow][currentCol]=0;
             }
         }
-        return false;
     }
 }
 
-bool solveNQueen(int** grid,int n)
+void solveNQueen(int** grid,int n)
 {
     int currentRow=0;
-    bool result=NQueenHelper(grid,currentRow,n);
-    return true;
+    NQueenHelper(grid,currentRow,n);
 }
 
 int main()
 {
+    fstream infile;
+    infile.open("D:\\Engineering books and class notes\\sem4no\\Practical exam\\DAA\\input.txt", ios::in);
+    if (!infile)
+    {
+        cout << "Error to open the file";
+        return 1;
+    }
     int n;
-    cout<<"Enter board size: ";
-    cin>>n;
+    //cout<<"Enter board size: ";
+    infile>>n;
     int** grid=new int*[n];
     for(int i=0;i<n;i++)
+    {
         grid[i]=new int[n];
-    for(int i=0;i<n;i++)
         for(int j=0;j<n;j++)
             grid[i][j]=0;
-
+    }
+    
     solveNQueen(grid,n);
 
-    cout<<"Correct configuration of queens: "<<endl;
-    for(int i=0;i<n;i++)
-    {
-        for(int j=0;j<n;j++)
-        {
-            if(grid[i][j]==1)
-                cout<<"Q ";
-            else
-                cout<<"_ ";
-        }
-        cout<<endl;
-    }
+    cout<<"Number of configurations: "<<count<<endl;
 
     for(int i=0;i<n;i++)
         delete [] grid[i];
