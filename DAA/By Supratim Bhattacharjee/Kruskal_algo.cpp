@@ -1,12 +1,14 @@
 //Name:- Supratim Bhattacharjee
 #include<iostream>
+#include<fstream>
 using namespace std;
 typedef long long ll;
 
 /*
 Kruskal's algorithm(Greedy algorithm)
 ----------------------------
-Time complexity:-O(E^2+EV)
+Time complexity:- O(eloge+elogn)
+Space complexity:- O(n)
 */
 
 class Edge
@@ -24,11 +26,6 @@ class Edge
         }  
 };
 
-bool comp(Edge e1,Edge e2)
-{
-    return e1.wt<e2.wt;
-}
-
 int findParent(int* parent,int vertex)
 {
     return parent[vertex]==vertex?vertex:findParent(parent,parent[vertex]);
@@ -36,6 +33,7 @@ int findParent(int* parent,int vertex)
 
 void kruskal_algo(Edge* input,int n,int e)
 {
+    int totalWeight=0;
     for(int i=0;i<e-1;i++)
     {
         int minWtEdgeIndx=i;
@@ -70,30 +68,42 @@ void kruskal_algo(Edge* input,int n,int e)
         i++;
     }
 
-    cout<<"MST of the graph with source destination and weight is: "<<endl;
+    cout<<"MST of the graph is: "<<endl;
     for(int i=0;i<n-1;i++)
-        cout<<output[i].src<<" "<<output[i].dst<<" "<<output[i].wt<<endl;
+    {
+        cout<<"From vertex "<<output[i].src<<" to vertex "<<output[i].dst<<" weight of MST is: "<<output[i].wt<<endl;
+        totalWeight+=output[i].wt;
+    }
+    cout<<"Total weight of MST is: "<<totalWeight<<endl;
 }
 
 int main()
 {
+    fstream infile;
+    infile.open("D:\\Engineering books and class notes\\sem4no\\Practical exam\\DAA\\input.txt", ios::in);
+    if (!infile)
+    {
+        cout << "Error to open the file";
+        return 1;
+    }
+
     int n,e;
-    cout<<"Enter number of vertices of graph: ";
-    cin>>n;
-    cout<<"Enter number of edges of graph: ";
-    cin>>e;
+    //cout<<"Enter number of vertices of graph: ";
+    infile>>n;
+    //cout<<"Enter number of edges of graph: ";
+    infile>>e;
 
     Edge* input=new Edge[e];
 
     for(int i=0;i<e;i++)
     {
         int s,d,w;
-        cout<<"Enter source of "<<i+1<<" edge: ";
-        cin>>s;
-        cout<<"Enter destination of "<<i+1<<" edge: ";
-        cin>>d;
-        cout<<"Enter weight of edge between vertex "<<s<<" ans vertex "<<d<<": ";
-        cin>>w;
+        //cout<<"Enter source of "<<i+1<<" edge: ";
+        infile>>s;
+        //cout<<"Enter destination of "<<i+1<<" edge: ";
+        infile>>d;
+        //cout<<"Enter weight of edge between vertex "<<s<<" ans vertex "<<d<<": ";
+        infile>>w;
         input[i].src=s;
         input[i].dst=d;
         input[i].wt=w;
