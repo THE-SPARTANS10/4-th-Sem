@@ -33,7 +33,7 @@ bool isSafeToColor(int currentNode,int* colors,int** graph,int n,int currentColo
     return true;
 }
 
-bool colorGraphHelper(int currentNode,int* colors,int m,int n,int** graph)
+void colorGraphHelper(int currentNode,int* colors,int m,int n,int** graph)
 {
     //Base case
     if(currentNode==n)
@@ -45,7 +45,6 @@ bool colorGraphHelper(int currentNode,int* colors,int m,int n,int** graph)
         }
         possibility++;
         cout<<endl;
-        return false;
     }
     else
     {
@@ -54,12 +53,10 @@ bool colorGraphHelper(int currentNode,int* colors,int m,int n,int** graph)
             if(isSafeToColor(currentNode,colors,graph,n,i))
             {
                 colors[currentNode]=i;
-                if(colorGraphHelper(currentNode+1,colors,m,n,graph))
-                    return true;
+                colorGraphHelper(currentNode+1,colors,m,n,graph);
                 colors[currentNode]=-1;
             }
         }
-        return false;
     }
 }
 
