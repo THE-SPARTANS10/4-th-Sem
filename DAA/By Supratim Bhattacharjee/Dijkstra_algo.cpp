@@ -8,7 +8,8 @@ typedef long long ll;
 /*
 Dijkstra's Algorithm(Greedy algorithm)
 ----------------------
-Time Complexity:-O(n^2)
+Time Complexity:- O(n^2)
+Space complexity:- O(n)
 */
 
 void printAdjacencyMatrix(int** adj,int n)
@@ -19,6 +20,14 @@ void printAdjacencyMatrix(int** adj,int n)
             cout<<adj[i][j]<<" ";
         cout<<endl;
     }
+}
+
+void printShortestPart(int* path,int i)
+{
+    if(path[i]==-1)
+        return;
+    printShortestPart(path,path[i]);
+    cout<<i<<"->"<<" ";
 }
 
 int findDistMinVertex(int* dist,bool* vis,int n)
@@ -63,6 +72,10 @@ void dijkstraAlgo(int** graph,bool* vis,int n,int sv,int dv)
     }
 
     cout<<"Minimum distance from vertex "<<sv<<" to vertex "<<dv<<" is: "<<dist[dv]<<endl;
+
+    cout<<"Shortest path from vertex "<<sv<<" to vertex "<<dv<<" is: "<<sv<<"-> ";
+    printShortestPart(parent, dv);
+    cout<<endl;
 
     delete [] dist;
     delete [] parent;
