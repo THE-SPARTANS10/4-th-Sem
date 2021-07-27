@@ -1,0 +1,103 @@
+#include<iostream>
+#include<bits/stdc++.h>
+#include<fstream>
+using namespace std;
+void Flyod_Warshall(int **adj,int v)
+{
+	int dist[v][v];
+	int i,j,k;
+	for(i=0;i<v;i++)
+	{
+		for(j=0;j<v;j++)
+		dist[i][j]=adj[i][j];
+	}
+	int path[v][v];
+	for(i=0;i<v;i++)
+	{
+		path[i][i]=i;
+	}
+	for(i=0;i<v;i++)
+	{
+		for(j=0;j<v;j++)
+		{
+			if(dist[i][j]>0 && adj[i][j]!=100000)
+			path[i][j]=i;
+		}
+	}
+	for(k=0;k<v;k++)
+	{
+		for(i=0;i<v;i++)
+		{
+			for(j=0;j<v;j++)
+			{
+				if(dist[i][k]==INT_MAX || dist[k][j]==INT_MAX)
+				continue;
+				else if(dist[i][k]+dist[k][j]<dist[i][j])
+				{
+					dist[i][j]=dist[i][k]+dist[k][j];
+					path[i][j]=k;
+				}
+			}
+		}
+	}
+	
+	for(i=0;i<v;i++)
+	{
+		if(dist[i][i]<0)
+		{
+			cout<<"Negative edge  weight cycle detected"<<"\n";
+			return;
+		}
+	}
+	
+	for(i=0;i<v;i++)
+	{
+		for(j=0;j<v;j++)
+		{
+			cout<<"The distance between "<<i<<" and "<<j<<" is "<<dist[i][j]<<"\n";
+//			cout<<"The path between "<<i<<" and "<<j<<" is "<<path[i][j]<<"\n";
+		}
+		cout<<"\n";
+	}
+	cout<<"The shortest path between all vertices is "<<"\n";
+	for(i=0;i<v;i++)
+	{
+		for(j=0;j<v;j++)
+		{
+			cout<<"The path between "<<i<<" and "<<j<<" is "<<path[i][j]<<"\n";
+		}
+	}
+}
+int main()
+{
+	fstream infile;
+	
+	infile.open("Flyod_warshall_algo_2.txt",ios::in);
+	int n,i,j,e;//number
+	if (!infile)
+    {
+        cout << "Error to open the file";
+        return 1;
+    }
+	cout<<"Enter the number of vertices"<<"\n";
+	infile>>n;
+	cout<<"Enter the number of edges"<<"\n";
+	infile>>e;
+	int u,v,wt;
+	int **adj=new int*[n];
+	for(i=0;i<n;i++)
+	{
+		adj[i]=new int[n];
+	}
+	cout<<"Enter the all edges and their weight"<<"\n";
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<n;j++)
+		{
+			infile>>adj[i][j];
+		}	
+	}
+	
+	
+	Flyod_Warshall(adj,n);
+}
