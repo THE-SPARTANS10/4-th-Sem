@@ -1,0 +1,53 @@
+#include <bits/stdc++.h>
+using namespace std;
+bool possible(int **adjMatrix, int n, int color[]){
+    for (int i = 0; i < n; ++i) {
+        for (int j = i+1; j < n; ++j) {
+            if (adjMatrix[i][j] != 0 && color[i] == color[j])
+                return false;
+        }
+    }
+    return true;
+}
+void mColoring(int **adjMatrix, int i, int m, int n, int color[]){
+    if (i == n){
+        if (possible(adjMatrix, n, color)){
+            for (int j = 0; j < n; ++j) {
+                cout << color[j] << " ";
+            }
+            cout << "\n";
+        }
+        return;
+    }
+    for (int j = 1; j <= m; ++j) {
+        color[i] = j;
+        mColoring(adjMatrix, i+1, m, n, color);
+        color[i] = 0;
+    }
+}
+int main()
+{
+    fstream infile;
+    infile.open("/home/tirthankar/CLionProjects/CollegeDSA4thSem/Day 3/Ex.txt", ios::in);
+    if(!infile){
+        cout << "Error to open the file";
+        return 1;
+    }
+    int n;
+    infile >> n;
+    int **adjMatrix = new int *[n];
+    for (int i = 0; i < n; ++i) {
+        adjMatrix[i] = new int[n];
+    }
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            infile >> adjMatrix[i][j];
+        }
+    }
+    int m;
+    infile >> m;
+    infile.close();
+    int color[n];
+    fill(color, color+n, 0);
+    mColoring(adjMatrix, 0, m, n, color);
+}
