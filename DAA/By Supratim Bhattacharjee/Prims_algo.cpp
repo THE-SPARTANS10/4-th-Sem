@@ -1,5 +1,6 @@
 //Name:- Supratim Bhattacharjee
 #include<iostream>
+#include<fstream>
 #include<climits>
 using namespace std;
 typedef long long ll;
@@ -24,6 +25,7 @@ int findMinimumVertex(int* weight,bool* visited,int n)
 
 void primsAlgo(int** graph,int n)
 {
+    int totalWeight=0;
     int* parent=new int[n];
     int* weight=new int[n];
     bool* visited=new bool[n];
@@ -60,7 +62,9 @@ void primsAlgo(int** graph,int n)
             cout<<"From vertex "<<parent[i]<<" to "<<i<<" vertex weight of MST is "<<weight[i]<<endl;
         else
             cout<<"From vertex "<<i<<" to "<<parent[i]<<" vertex weight of MST is "<<weight[i]<<endl;
+        totalWeight+=weight[i];
     }
+    cout<<"Total weight of MST is: "<<totalWeight<<endl;
 }
 
 void printAdjacencyMatrix(int** adj,int n)
@@ -75,11 +79,19 @@ void printAdjacencyMatrix(int** adj,int n)
 
 int main()
 {
+    fstream infile;
+    infile.open("D:\\Engineering books and class notes\\sem4no\\Practical exam\\DAA\\input.txt", ios::in);
+    if (!infile)
+    {
+        cout << "Error to open the file";
+        return 1;
+    }
+
     int n,e;
-    cout<<"Enter number of vertices of graph: ";
-    cin>>n;
-    cout<<"Enter number of edges of graph: ";
-    cin>>e;
+    //cout<<"Enter number of vertices of graph: ";
+    infile>>n;
+    //cout<<"Enter number of edges of graph: ";
+    infile>>e;
 
     int** adj=new int*[n];
     for(int i=0;i<n;i++)
@@ -92,10 +104,10 @@ int main()
     for(int i=0;i<e;i++)
     {
         int first,second,weight;
-        cout<<"Enter connected verties of graph:"<<endl;
-        cin>>first>>second;
-        cout<<"Enter weight between "<<first<<" node and "<<second<<" node: ";
-        cin>>weight;
+        //cout<<"Enter connected verties of graph:"<<endl;
+        infile>>first>>second;
+        //cout<<"Enter weight between "<<first<<" node and "<<second<<" node: ";
+        infile>>weight;
         adj[first][second]=weight;
         adj[second][first]=weight;
     }
