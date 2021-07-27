@@ -1,5 +1,6 @@
 //Name:- Supratim Bhattacharjee
 #include<iostream>
+#include<fstream>
 using namespace std;
 typedef long long ll;
 
@@ -10,7 +11,7 @@ Time complexity:-O(n^2) (O(n^2) for sorting and O(n) for traversing the whole pr
 Space complexity:-O(1)
 */
 
-float knapsack(float* profit,float* weight,float w,int n)
+void knapsack(float* profit,float* weight,float w,int n)
 {
     int count=0;
     for(int i=0;i<n-1;i++)
@@ -28,6 +29,7 @@ float knapsack(float* profit,float* weight,float w,int n)
         }
     }
     float tempWeight=w;
+    cout<<"Profit values are: "<<endl;
     int i=0;
     for(;i<n;i++)
     {
@@ -35,31 +37,42 @@ float knapsack(float* profit,float* weight,float w,int n)
             break;
         count+=profit[i];
         tempWeight-=weight[i];
+        cout<<"total of "<<profit[i]<<endl;
     }
     if(i<n)
+    {
         count+=(tempWeight/weight[i])*profit[i];
-    return count;
+        cout<<(tempWeight/weight[i])<<" part of "<<profit[i]<<endl<<endl;
+    }
+    cout<<"Maximum profit is: "<<count<<endl;
 }
 
 
 int main()
 {
+    fstream infile;
+    infile.open("D:\\Engineering books and class notes\\sem4no\\Practical exam\\DAA\\input.txt", ios::in);
+    if (!infile)
+    {
+        cout << "Error to open the file";
+        return 1;
+    }
+
     int n;
-    cout<<"Enter size of array: ";
-    cin>>n;
+    //cout<<"Enter size of array: ";
+    infile>>n;
     float w;
-    cout<<"Enter capacity of Knapsack: ";
-    cin>>w;
+    //cout<<"Enter capacity of Knapsack: ";
+    infile>>w;
     float *profit=new float[n];
     float *weight=new float[n];
-    cout<<"Enter profit values: ";
+    //cout<<"Enter profit values: ";
     for(int i=0;i<n;i++)
-        cin>>profit[i];
-    cout<<"Enter weight values: ";
+        infile>>profit[i];
+    //cout<<"Enter weight values: ";
     for(int i=0;i<n;i++)
-        cin>>weight[i];
-    int maxProfit=knapsack(profit,weight,w,n);
-    cout<<"Maximum profit is: "<<maxProfit<<endl;
+        infile>>weight[i];
+    knapsack(profit,weight,w,n);
     delete [] profit;
     delete [] weight;
 
