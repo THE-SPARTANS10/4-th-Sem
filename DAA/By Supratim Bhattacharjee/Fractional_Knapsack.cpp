@@ -50,6 +50,14 @@ void knapsack(float* profit,float* weight,float w,int n)
 
 int main()
 {
+    /*
+    Sample Input:- 
+
+    4 50
+    60 100 120 40
+    10 20 30 40
+    */
+
     fstream infile;
     infile.open("D:\\Engineering books and class notes\\sem4no\\Practical exam\\DAA\\input.txt", ios::in);
     if (!infile)
