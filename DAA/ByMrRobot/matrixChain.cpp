@@ -33,6 +33,19 @@ void matrixChain(int p[], int n){
             }
         }
     }
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            cout << minCost[i][j] << " ";
+        }
+        cout << "\n";
+    }
+    cout << "\n";
+    for (int i = 1; i < n; ++i) {
+        for (int j = 1; j < n; ++j) {
+            cout << brackets[i][j] << " ";
+        }
+        cout << "\n";
+    }
     cout << "Optimal bracket ordering will be ";
     char ch = 'A';
     printBrackets(1, n-1, brackets, ch);
