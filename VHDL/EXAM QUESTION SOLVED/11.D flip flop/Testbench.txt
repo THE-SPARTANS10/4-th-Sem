@@ -1,0 +1,93 @@
+-- Code your testbench here
+library IEEE;
+use IEEE.std_logic_1164.all;
+entity testbench is
+--empty
+end testbench;
+
+architecture tb of testbench is
+
+component d_ff is
+port(d,clk,reset:in std_logic;
+               q:out std_logic);
+end component;
+
+signal D_in,clk_in,pre_in,O_out: std_logic;
+
+begin
+  DUT: d_ff port map(D_in,clk_in,pre_in,O_out);
+  process
+    begin
+    for i in 1 to 6 loop
+        clk_in<='0';
+        wait for 1 ns;
+        clk_in<='1';
+        wait for 1 ns;
+      end loop;
+      wait;
+    end process;
+    
+    process
+      begin
+    D_in<='1';
+    pre_in<='1';
+    
+    wait for 1 ns;
+    
+    D_in<='1';
+    pre_in<='1';
+    
+    wait for 1 ns;
+    
+    D_in<='0';
+    pre_in<='0';
+    
+    wait for 1 ns;
+    
+    D_in<='1';
+    pre_in<='1';
+    
+    wait for 1 ns;
+    
+    D_in<='1';
+    pre_in<='1';
+   
+    wait for 1 ns;
+    
+    D_in<='1';
+    pre_in<='0';
+    
+    wait for 1 ns;
+    
+    D_in<='0';
+    pre_in<='1';
+    
+    wait for 1 ns;
+    
+    D_in<='1';
+    pre_in<='0';
+    
+    wait for 1 ns;
+    
+    D_in<='1';
+    pre_in<='1';
+    
+    wait for 1 ns;
+    
+    D_in<='0';
+    pre_in<='1';
+    
+    wait for 1 ns;
+    
+    D_in<='1';
+    pre_in<='0';
+    
+    wait for 1 ns;
+    
+    D_in<='0';
+    pre_in<='0';
+    
+    wait for 1 ns;  
+    wait;
+  end process;
+end tb;
