@@ -13,7 +13,7 @@ port(
   );
 end decoder24;
 
-architecture structural of decoder24 is
+architecture behavioral of decoder24 is
   begin
   process(a,b)
     begin
@@ -39,4 +39,4 @@ architecture structural of decoder24 is
         O3<='1';
       end if;
   end process;
-end structural;
+end behavioral;
