@@ -1,0 +1,38 @@
+-- Code your testbench here
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity testbench is
+end testbench;
+
+architecture tb of testbench is
+component sync_counter is
+port(
+ cl,vcc,rt:in std_logic;
+    q0,q1,q2,q3:out std_logic);
+end component;
+signal cl,vcc,rt:std_logic;
+begin
+ cnnt: sync_counter port map(cl,vcc,rt);
+    clock:process
+    begin
+     for i in 1 to 30 loop
+         cl<='0';
+            wait for 0.25 ns;
+            cl<='1';
+            wait for 0.25 ns;
+         end loop;
+        wait;
+      end process;
+     input:process
+     begin
+      rt<='1';
+        vcc<='1';
+        wait for 0.5 ns;
+   
+        vcc<='1';
+        rt<='0';
+        wait for 8 ns;
+        wait;
+        end process;
+end tb;
