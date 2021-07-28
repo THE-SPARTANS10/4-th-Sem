@@ -13,7 +13,7 @@ port(
   );
 end encoder42;
 
-architecture structural of encoder42 is
+architecture behavioral of encoder42 is
   begin
   process(I0,I1,I2,I3)
     begin
@@ -31,4 +31,4 @@ architecture structural of encoder42 is
         O1<='1';
       end if;
   end process;
-end structural;
+end behavioral;
